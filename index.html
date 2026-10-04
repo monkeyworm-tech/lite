@@ -1,380 +1,267 @@
-<html lang="en"><head><meta charset="UTF-8"><title>Geometry Dash Lite</title><meta name="robots" content="noindex, nofollow"><meta name="viewport"
- content="width=device-width, initial-scale=1.0, minimal-ui, shrink-to-fit=no viewport-fit=cover"><meta name="HandheldFriendly" content="true"/><meta http-equiv="x-ua-compatible" content="ie=edge"><style>#loader_game_iframe {
- display: inline-block;
- width: 15px;
- aspect-ratio: 1;
- border-radius: 50%;
- animation: 1s linear infinite alternate l5
- }
+<!DOCTYPE html>
+<html lang="en-US">
 
- @keyframes l5 {
- 0% {
- box-shadow: 20px 0 #818181, -20px 0 #0002;
- background: #818181
- }
- 33% {
- box-shadow: 20px 0 #818181, -20px 0 #0002;
- background: #0002
- }
- 66% {
- box-shadow: 20px 0 #0002, -20px 0 #818181;
- background: #0002
- }
- 100% {
- box-shadow: 20px 0 #0002, -20px 0 #000;
- background: #000
- }
- }
+<head>
+    
+    
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
- .game-preview, .game-preview-bgi, .game_area_frame {
- top: 0;
- height: 100%;
- width: 100%;
- left: 0
- }
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'G-');
+    </script>
+    <base href="https://rawcdn.githack.com/genizy/google-class/main/gdlite/">
+    <title>Geometry Dash Lite</title>
+    <link rel="icon" type="image/png" href="images/unnamed.ico">
+    <meta name="description" content="Play Geometry Dash Lite Online For Free on Chromebook, PC, Windows, Desktop in Chrome and modern browsers.">
+    <link rel="canonical" href="https://gamecomets.com/game/geometry-dash-lite/" />
+    <meta name="robots" content="noindex, nofollow">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="themes/geometrydashlite.io/rs/css/home.css?v=1">
+</head>
+<meta name="cf-2fa-verify" content="GpoihhhSRQknehLQkEtXM">
 
- .close_mobile_box img, .close_mobile_box svg {
- width: 24px;
- height: 24px
- }
+<body>
+    <style>
+        html {
+            box-sizing: border-box;
+        }
+        
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+        
+        body {
+            margin: 0;
+            background-image: linear-gradient(rgb(0, 0, 0), rgb(0, 102, 255));
+            overflow: hidden;
+        }
+        
+        #gameContainer {
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        
+        canvas+* {
+            z-index: 2;
+        }
+        
+        .container {
+            max-width: 1600px;
+            position: relative;
+        }
+        
+        .posImg {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .logo {
+            position: absolute;
+            display: block;
+            max-width: 100vw;
+            max-height: 70vh;
+            top: 300px;
+        }
+        
+        .pos_progress {
+            position: absolute;
+            bottom: 15%;
+            width: 100%;
+        }
+        
+        .progress {
+            margin: 1.5em auto;
+            max-width: 436px;
+            height: auto;
+            display: none;
+            position: relative;
+        }
+        
+        .full {
+            width: 97%;
+            transform-origin: top left;
+        }
+        
+        .box_process {
+            width: 100%;
+        }
+        
+        .process {
+            width: 98%;
+        }
+        
+        .progress .posfull,
+        .progress .posbox {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .progress .posfull {
+            top: 8px;
+            z-index: 1;
+        }
+        
+        .progress .posbox {
+            top: 0;
+            z-index: 2;
+        }
+        
+        #loader {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-image: linear-gradient(rgb(0, 0, 0), rgb(0, 102, 255));
+        }
+        
+        .pos_spinner {
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translate(-30%, -50%);
+        }
+        
+        .spinner,
+        .spinner:after {
+            display: none;
+            border-radius: 50%;
+            width: 5em;
+            height: 5em;
+        }
+        
+        .spinner {
+            margin: 10px;
+            font-size: 10px;
+            position: relative;
+            text-indent: -9999em;
+            border-top: 1.1em solid rgba(255, 255, 255, 0.2);
+            border-right: 1.1em solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
+            border-left: 1.1em solid #ffffff;
+            transform: translateZ(0);
+            animation: spinner-spin 1.1s infinite linear;
+        }
+        
+        @keyframes spinner-spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <div id="gameContainer"></div>
+    <div id="loader"><img class="logo" src="image/loading.png?v=1">
+        <div class="spinner"></div>
+        <div class=" pos_progress">
+            <div class="progress">
+                <div class="posfull"><img class="full" src="image/process_bar_back.png"></div>
+                <div class="posbox"><img class="box_process" src="image/process_bar_front.png"></div>
+            </div>
+        </div>
+        <script src="Build/UnityLoader.js"></script>
+        <script>
+            var gameInstance = UnityLoader.instantiate("gameContainer", "Build/GeometryDashLite.json", {
+                onProgress: UnityProgress
+            });
 
- .is_mobile .game-preview-bgi {
- filter: unset
- }
+            function UnityProgress(gameInstance, progress) {
+                if (!gameInstance.Module) {
+                    return;
+                }
+                const loader = document.querySelector("#loader");
+                if (!gameInstance.progress) {
+                    const progress = document.querySelector("#loader .progress");
+                    progress.style.display = "block";
+                    gameInstance.progress = progress.querySelector(".full");
+                    loader.querySelector(".spinner").style.display = "none";
+                }
+                gameInstance.progress.style.transform = `scaleX(${progress})`;
+                if (progress === 1 && !gameInstance.removeTimeout) {
+                    gameInstance.removeTimeout = setTimeout(function() {
+                        loader.style.display = "none";
+                    }, 2000);
+                }
+            }
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                let buttondiv = document.getElementsByTagName('button');
+                for (let i = 0; i < buttondiv.length; i++) {
+                    if (buttondiv[i].innerHTML == "OK") {
+                        buttondiv[i].click();
+                    }
+                }
+                setTimeout(function() {
+                    let buttonok = document.getElementsByTagName('button');
+                    for (let i = 0; i < buttondiv.length; i++) {
+                        if (buttonok[i].innerHTML == "OK") {
+                            buttonok[i].click();
+                        }
+                    }
+                }, 1000);
+            });
+        </script>
+        <script src="themes/geometrydashlite.io/rs/js/jquery-3.4.1.min.js"></script>
+        <script>
+            function ToggleInfo() {
+                if ($('button.hide-main-panel').children('i')[0].textContent != 'Info') {
+                    $("div.main-panel").css('width', '0px');
+                    $("div.main-panel-ads").css('display', 'none');
+                    $("div.main-panel-content").css('display', 'none');
+                    $('button.hide-main-panel').children('i').html('Info');
+                    console.log('Info');
+                } else {
+                    $("div.main-panel").css('width', $("div.main-panel").css('max-width'));
+                    $("div.main-panel-ads").css('display', 'block');
+                    $("div.main-panel-content").css('display', 'block');
+                    $('button.hide-main-panel').children('i').html('>>');
+                    console.log('>>');
+                }
+            }
 
- .close_mobile_box.hide, .is_mobile .game-preview__logo {
- display: none
- }
+            function ShowInfo() {
+                $("div.main-panel").css('width', $("div.main-panel").css('max-width'));
+                $("div.main-panel-ads").css('display', 'block');
+                $("div.main-panel-content").css('display', 'block');
+                $('button.hide-main-panel').children('i').html('>>');
+            }
 
- body {
- font-family: 'Trebuchet MS', sans-serif
- }
+            function HideInfo() {
+                $("div.main-panel").css('width', '0px');
+                $("div.main-panel-ads").css('display', 'none');
+                $("div.main-panel-content").css('display', 'none');
+                $('button.hide-main-panel').children('i').html('Info');
+            }
+            $('button.hide-main-panel').click(function() {
+                console.log('a');
+                ToggleInfo();
+            });
+        </script>
 
- .game_area_frame {
- display: flex;
- align-items: center;
- justify-content: center;
- background: #0a0a0a;
- z-index: 1;
- overflow: hidden;
- border: 0;
- position: fixed;
- right: 0;
- bottom: 0
- }
 
- .game-preview {
- position: absolute;
- overflow: hidden
- }
-
- .game-preview-bgi {
- position: absolute;
- z-index: 10;
- background-position: center;
- background-size: cover;
- filter: blur(10px)
- }
-
- .game-preview__content {
- position: relative;
- z-index: 20;
- display: -webkit-box;
- display: -ms-flexbox;
- display: flex;
- -webkit-box-orient: vertical;
- -webkit-box-direction: normal;
- -ms-flex-direction: column;
- flex-direction: column;
- -webkit-box-align: center;
- -ms-flex-align: center;
- align-items: center;
- -webkit-box-pack: center;
- -ms-flex-pack: center;
- justify-content: center;
- height: 100%;
- background-color: rgba(0, 0, 0, .6)
- }
-
- .game-preview__logo img {
- border-radius: 8px;
- -webkit-box-shadow: 0 0 1rem 0 #fff;
- box-shadow: 0 0 1rem 0 #fff;
- max-width: 200px
- }
-
- .game-preview__title {
- font-size: 24px;
- color: #fff;
- font-weight: 700;
- margin: 20px auto;
- background: linear-gradient(90deg, rgba(30, 87, 153, 0) 0, rgba(0, 0, 0, .3) 50%, rgba(125, 185, 232, 0));
- width: 100%;
- text-align: center;
- padding: 14px 0;
- font-family: inherit
- }
-
- .play-btn {
- position: relative;
- display: inline-block;
- vertical-align: top;
- height: 50px;
- }
-
- .play-btn__ctrl {
- overflow: hidden;
- -webkit-appearance: none;
- -moz-appearance: none;
- appearance: none;
- position: relative;
- z-index: 10;
- box-shadow: 0 0 1rem 0 #fff;
- background: #ff3814;
- font-weight: 700;
- color: #fff;
- height: 50px;
- font-size: 22px;
- padding: 0 32px;
- border-radius: 16px;
- border: 0;
- margin: 0;
- cursor: pointer;
- -webkit-overflow-scrolling: touch;
- transition: box-shadow .15s, background-color .15s, transform .1s, opacity .1s
- }
-
- .play-btn__ctrl[disabled=disabled] {
- opacity: .5
- }
-
- .play-btn__ctrl:before {
- content: "";
- position: absolute;
- height: 30px;
- left: 50%;
- width: 50px;
- margin-left: -25px;
- top: 45px;
- z-index: 0;
- border-radius: 10px;
- background-color: #fff
- }
-
- .close_mobile_box {
- align-items: center;
- background: #fff;
- border-radius: 0 16px 16px 0;
- box-shadow: 0 2px 12px 4px #5d6b8414, 0 23px 9px 0 #5d6b8408, 0 13px 8px 0 #5d6b8417, 0 6px 6px 0 #5d6b8426, 0 1px 3px 0 #5d6b842e;
- display: flex;
- height: 46px;
- padding: 0 7px 0 0;
- overflow: hidden;
- display: flex;
- justify-content: center;
- position: fixed;
- top: 24px;
- left: 0;
- color: #009cff;
- z-index: 999;
- border-top: 2px solid #fff;
- border-bottom: 2px solid #fff;
- border-right: 2px solid #fff
- }
-
- .game-iframe, .game__video {
- height: 100%;
- top: 0;
- width: 100%
- }
-
- .close_mobile_box svg {
- display: inline-block;
- vertical-align: middle;
- fill: currentColor;
- font-size: 0
- }
-
- .game-frame, .game-frame iframe {
- width: 100%
- }
-
- .game-iframe {
- position: absolute;
- bottom: 0;
- left: 0;
- right: 0
- }
-
- .game__preview {
- position: absolute;
- inset: 0;
- cursor: pointer
- }
-
- .game__preview::before {
- content: "";
- position: absolute;
- inset: 0;
- z-index: 2;
- background: url("/themes/poor-bunny/resources/images/pattern.svg") 0 0/3.125rem 3.125rem rgba(33, 26, 48, .5);
- mix-blend-mode: soft-light
- }
-
- .game__video {
- position: absolute;
- left: 0;
- -o-object-fit: cover;
- object-fit: cover;
- -o-object-position: bottom center;
- object-position: bottom center;
- z-index: 1
- }
-
- .frame_fix_mobile {
- position: fixed !important;
- left: 0;
- background: #fff;
- z-index: 9999;
- top: 0;
- bottom: 0;
- min-height: 100vh;
- height: 100vh;
- box-shadow: unset;
- border-radius: unset;
- width: 100vw
- }
-
- .frame_fix_mobile .game-preview {
- height: 100% !important;
- width: 100% !important
- }</style><script data-cfasync="false">const isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
- const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
- const _isMobile = (isMobile || isTouchDevice) && window.matchMedia('(max-width: 768px)').matches;</script></head><body>
-<div class="game_area_frame" id="game"
- style="height:100%"><div class="game-preview"><div class="game-preview-bgi" style="background-image: url('/cache/data/image/game/geometry-dash/geometry-lite-game-m186x186.webp')"></div><div class="game-preview__content"><div class="game-preview__logo"><img src="/cache/data/image/game/geometry-dash/geometry-lite-game-m186x186.webp" alt="Play Geometry Dash Lite now!"></div><div class="game-preview__title">Geometry Dash Lite</div><div class="game-preview__run"><div class="play-btn"><button id="show-embed"
- style="display: none" data-width="800"
- data-height="600"
- data-iframe="https://geometry-dash-lite.1games.io/"
- type="button" class="play-btn__ctrl">Play</button><div id="loader_game_iframe"></div></div></div></div></div><div id="game-code" class="game-frame" data-id="1" style="display: none;"></div><div id="game-code-mobile" class="game-frame" style="display: none;" data-id="1"></div><!--<div class="close_mobile_box hide" id="mobile-nav"><svg width="24" height="24"><path d="M15.707 17.293l-5.293-5.293 5.293-5.293c0.391-0.391 0.391-1.024 0-1.414s-1.024-0.391-1.414 0l-6 6c-0.391 0.391-0.391 1.024 0 1.414l6 6c0.391 0.391 1.024 0.391 1.414 0s0.391-1.024 0-1.414z"></path></svg><img class="icon" width="32" height="32" src="/resources/images/icon_1games.png"
- alt="Back to Game"></div>--></div><script data-cfasync="false">var isNewWindow = false;
- var hasVideoPreview = false;</script><script data-cfasync="false">if (!isMobile || !isTouchDevice) {
- window.addEventListener("DOMContentLoaded", function () {
- let prerollButton = document.querySelector("#show-embed");
- let loading_iframe = document.querySelector("#loader_game_iframe");
- prerollButton.style.display = 'inline-block';
- loading_iframe.style.display = 'none';
-
- if (!isNewWindow) {
- prerollButton.addEventListener('click', e => {
- loadGameIframe();
- });
-
- // Tự động tải iframe nếu không phải mobile, không có preroll và không có video preview
- if (!_isMobile && !hasVideoPreview) {
- prerollButton.click();
- }
- }
- });
- } else {
- console.log("load mobile");
- loadGameIframe();
- }
-
- 
- function loadGameIframe() {
- // Determine if the device is mobile
- /* const isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
- const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;*/
-
- // Get the iframe data from the element with id "show-embed"
- const showEmbed = document.getElementById("show-embed");
- const link_iframe = showEmbed.getAttribute('data-iframe');
- const width = showEmbed.getAttribute('data-width');
- const height = showEmbed.getAttribute('data-height');
-
- // Construct the iframe HTML string
- const html = '<iframe class="game-iframe" loading="lazy" id="game-area" src="' +
- link_iframe + '" width="' + width + '" height="' + height +
- '" scrolling="none" frameborder="0" allowfullscreen></iframe>';
-
- if (_isMobile) {
- // Hide the non-mobile game code element
- const gameCode = document.getElementById("game-code");
- if (gameCode) {
- gameCode.style.display = 'none';
- }
- // Add fullscreen class to the body
- document.body.classList.add("isFullscreen");
-
- // Add mobile-specific classes
- document.querySelectorAll(".game_area_frame").forEach(function (el) {
- el.classList.add("frame_fix_mobile");
- });
- document.querySelectorAll(".close_mobile_box").forEach(function (el) {
- el.classList.remove("hide");
- });
-
- // Set the mobile game code with the iframe HTML and display it
- const gameCodeMobile = document.getElementById("game-code-mobile");
- if (gameCodeMobile) {
- gameCodeMobile.innerHTML = html;
- gameCodeMobile.style.display = 'block';
- }
- // Hide the game preview elements
- document.querySelectorAll(".game-preview").forEach(function (el) {
- el.style.display = 'none';
- });
- } else {
- // Hide the mobile game code element
- const gameCodeMobile = document.getElementById("game-code-mobile");
- if (gameCodeMobile) {
- gameCodeMobile.style.display = 'none';
- }
- // Remove fullscreen class from the body
- document.body.classList.remove("isFullscreen");
-
- // Remove mobile-specific classes and add hide class where necessary
- document.querySelectorAll(".game_area_frame").forEach(function (el) {
- el.classList.remove("frame_fix_mobile");
- });
- document.querySelectorAll(".close_mobile_box").forEach(function (el) {
- el.classList.add("hide");
- });
-
- // Set the game code with the iframe HTML and display it
- const gameCode = document.getElementById("game-code");
- if (gameCode) {
- gameCode.innerHTML = html;
- gameCode.style.display = 'block';
- }
- // Hide the game preview elements
- document.querySelectorAll(".game-preview").forEach(function (el) {
- el.style.display = 'none';
- });
- }
-
- // Handle the mobile navigation close button click
- const mobileNav = document.getElementById("mobile-nav");
- if (mobileNav) {
- mobileNav.addEventListener('click', function () {
- document.body.classList.remove("isFullscreen");
- document.querySelectorAll(".game_area_frame").forEach(function (el) {
- el.classList.remove("frame_fix_mobile");
- });
- document.querySelectorAll(".close_mobile_box").forEach(function (el) {
- el.classList.add("hide");
- });
- document.querySelectorAll(".game-preview").forEach(function (el) {
- el.style.display = 'block';
- });
- const gameCodeMobile = document.getElementById("game-code-mobile");
- if (gameCodeMobile) {
- gameCodeMobile.style.display = 'none';
- }
- });
- }
- }
-
-</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"c37f7103f81943c08bd153b8524ed7a5","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
-</body></html>
+</html>
